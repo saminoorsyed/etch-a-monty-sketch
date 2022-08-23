@@ -8,7 +8,33 @@
     <title>Etch-a-Sketch</title>
 </head>
 <body>
-    <div class="container">
+    <div class="wrapper">
+        <div class="control-panel">
+            <div class="color-pickers">
+                <div class = "picker-box">
+                    <input type="color" id = "pen-color">
+                    <span>pen-color</span>
+                </div>
+                    <div class = "picker-box">
+                    <input type="color" id = "grid-color">
+                    <span>grid-color</span>
+                </div>
+            </div>
+            <div class = "grid-param">
+                <input type="range" id = "dimensions" min = "1" max = "128">
+                <span>grid dimensions</span>
+            </div>
+            <div class ="effects">
+                <button>clear</button>
+                <button>invert</button>
+                <button>rainbow</button>
+                <!-- for eraser, just set pen color to grid background -->
+                <button>eraser</button> 
+                <button>save pdf</button>
+            </div>
+        </div>
+        <div class="container">
+        </div>
     </div>
 </body>
 <script src="./script.js"></script>
