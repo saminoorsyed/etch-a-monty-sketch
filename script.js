@@ -1,3 +1,6 @@
 const container = document.querySelector('container');
 
-function genSketchPad()
+// generate grid dimensions based on range slider
+function genGridDimensions(){
+
+}

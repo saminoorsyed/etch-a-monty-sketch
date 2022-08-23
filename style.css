@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    margin: 40px;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.control-panel{
+    width: 200px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid 1px red;
+    gap: 100px
+}
+
+.grid {
+    width: 500px;
+    min-width: 500px;
+    height: 500px;
+    box-shadow: 0 0 5px 5px #888 ;
+    display: flex;
+    flex-wrap: wrap;
+}
