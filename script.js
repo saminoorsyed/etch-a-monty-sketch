@@ -17,10 +17,25 @@ function populateContainer (dimension){
     // clear the current container
     clearContainer();
     // find width of container div
-    // divide width of container div by number divs to find grid width
+    const containerWidth = container.clientWidth;
+    // calulate the width of each internal div
+    const gridDim = (containerWidth/parseInt(dimension));
+    for (i = 0; i < dimension**2; i++) {
+        console.log('hello')
+        const gridEl = document.createElement('div');
+        // set width and height of grid elements to appropriate value
+        gridEl.style.width = `${gridDim}px`;
+        gridEl.style.height = `${gridDim}px`;
+        container.appendChild(gridEl);
+        // gridEl.addEventListener('mouseover', changeGridColor());
+        // gridEl.addEventListener('mousedown', changeGridColor());
+
+    }
+
     // create dimension**2 number of divs to fill the container
     // add onclick and drag listeners to each div to change the color
 }
+
 
 function getPenColor(color){
     console.log(color);

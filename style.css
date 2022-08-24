@@ -25,6 +25,9 @@
     box-shadow: 0 0 5px 5px #888 ;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-start;
 }
 
 .grid-param {
@@ -35,5 +38,8 @@
     gap: 5px;
 }
 
+/* style grid elements inside of the container */
 .container > div {
+    outline: 1px solid black;
+    flex-wrap: wrap;
 }
