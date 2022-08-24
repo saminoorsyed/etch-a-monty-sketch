@@ -21,19 +21,20 @@
                 </div>
             </div>
             <div class = "grid-param">
-                <input type="range" class="slider" min="0" max="128" step="1" value="1">
+                <input type="range" class="slider" min="0" max="10" step="1" value="1">
                 <span>grid dimensions</span>
+                <span class="display-dim"></span>
             </div>
             <div class ="effects">
-                <button>clear</button>
-                <button>invert</button>
-                <button>rainbow</button>
+                <button onclick="clearGrid()" >clear</button>
+                <button onclick="toggleInvert()">invert</button>
+                <button onclick ="toggleRainbow()">rainbow</button>
                 <!-- for eraser, just set pen color to grid background -->
-                <button>eraser</button> 
-                <button>save pdf</button>
+                <button onclick="toggleEraser()">eraser</button> 
+                <button onclick="savePDF()">save pdf</button>
             </div>
         </div>
-        <div class="grid">
+        <div class="container">
         </div>
     </div>
 <script src="./script.js"></script>

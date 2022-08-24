@@ -1,20 +1,53 @@
 const container = document.querySelector('.container');
 const slider = document.querySelector('.slider');
-// generate grid dimensions based on range slider
-let rangeDrag = false;
-let dimension;
-
-function genDimensions(){
-    // if the mouse is not clicked down, do not run the function when mouse is moving over div
-    if (!rangeDrag) return;
-    // the value of the range slider from 1 to 128
-    dimension = this.value;
-    // populate the container div with container elements
+const displayDim = document.querySelector('.display-dim');
+const penColor = document.getElementById('pen-color')
+const gridColor = document.getElementById('grid-color')
+// display the dimensions
+function updateSize(dimension) {
+    displayDim.innerHTML = `${dimension} x ${dimension}`
 }
 
-slider.addEventListener('change', genDimensions);
-slider.addEventListener('mousemove', genDimensions);
+// retriev info from page
+function getSize(size){
+    console.log(size);
+}
 
-slider.addEventListener('mousedown', () => rangeDrag = true);
-slider.addEventListener('mouseup', () => rangeDrag = false);
-slider.addEventListener('mouseout', () => rangeDrag = false);
+function getPenColor(color){
+    console.log(color);
+}
+
+function getGridColor(color){
+    console.log(color);
+}
+
+// button 'onclick' functions
+function clearGrid(){
+    console.log('clear');
+}
+
+function toggleInvert(){
+    console.log('invert');
+}
+
+function toggleRainbow(){
+    console.log('rainbow');
+}
+
+function toggleEraser(){
+    console.log('eraser');
+}
+
+function savePDF(){
+    console.log('save');
+}
+// listen for change in dimension
+slider.onmousemove = (e) => updateSize(e.target.value);
+slider.onchange = (e) => getSize(e.target.value);
+
+// listen for change in colors
+penColor.onchange = (e) => getPenColor(e.target.value);
+gridColor.onchange = (e) => getGridColor(e.target.value);
+
+
+
