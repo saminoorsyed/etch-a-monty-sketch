@@ -1,18 +1,23 @@
 const mean = document.querySelector('.mean');
 const container = document.querySelector('.container');
 const slider = document.querySelector('.slider');
+const meanness = document.querySelector('.mean-scale');
 const displayDim = document.querySelector('.display-dim');
 const penColorPicker = document.getElementById('pen-color');
 const gridColorPicker = document.getElementById('grid-color');
 const body = document.querySelector('body');
 const eraser = document.getElementById('eraser');
 const rainbow = document.getElementById('rainbow');
+const meanDisplay = document.getElementById("display-mean")
 
 // default pen and grid colors and grid dimensions
 let penColor = '#000000';
 let penBackup= '#000000';
 let gridColor= 'rgb(255, 255, 255)';
 let dimension = 16;
+let meanFlag = false;
+let meanCount = 0;
+let meanScale = 0;
 
 // flags
 let isDrag = false;
@@ -38,7 +43,7 @@ function populateContainer (gridSize){
         // set width and height of grid elements to appropriate value
         gridEl.style.width = `${gridDim}px`;
         gridEl.style.height = `${gridDim}px`;
-        gridEl.style.backgroundColor = gridColor
+        gridEl.style.backgroundColor = gridColor;
         container.appendChild(gridEl);
         // add event listeners to adjust isdrag flag
         // initiate changeGridColor function when mouse clicks or 
@@ -148,30 +153,30 @@ function toggleRainbow(){
     }
 }
 
+function meanAdjust(meanVal){
+    meanScale = meanVal;
+    // display how mean
+    if (meanScale === '10'){
+        meanDisplay.textContent ='Draw to reveal a message'
+    }else{
+        meanDisplay.textContent = `Meanness: ${meanScale}`
+    }
+}
+
 // listen for change in dimension
 slider.onmousemove = (e) => updateSize(e.target.value);
 slider.onchange = (e) => populateContainer(e.target.value);
+// listen for change in meanness
+meanness.onchange = (e) => meanAdjust(e.target.value);
+
 
 // listen for change in colors
 penColorPicker.onchange = (e) => changePenColor(e.target.value);
 gridColorPicker.onchange = (e) => changeGridColor(e.target.value);
 
-// move mean div behind container div
-// let containerCoords = container.getBoundingClientRect();
-// let coords = {
-//     top: containerCoords.top,
-//     left: containerCoords.left,
-//     width: containerCoords.width,
-//     height: containerCoords.height
-// };
-// console.log(containerCoords);
-// mean.style.height = coords.height +'px';
-// mean.style.width = coords.width +'px';
-// mean.style.transform =`translate(-${coords.left}px, -${coords.top}px)`;
-
-// // handle whether or not user is still holding the mouse down to draw
-// container.addEventListener('mousedown',() => isDrag = true);
-// body.addEventListener('mouseup',()=> isDrag = false);
+// handle whether or not user is still holding the mouse down to draw
+container.addEventListener('mousedown',() => isDrag = true);
+body.addEventListener('mouseup',()=> isDrag = false);
 
 populateContainer(dimension);
 updateSize(dimension);

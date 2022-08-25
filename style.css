@@ -25,7 +25,8 @@
     box-shadow: 0 0 5px 5px #888 ;
     display: flex;
     flex-wrap: wrap;
-    opacity: 0;
+    opacity: 1;
+    z-index: 1;
 }
 
 .grid-param {
@@ -37,7 +38,9 @@
 }
 
 .mean{
-    background-color: red;
+    z-index: auto;
     margin-left: -540px;
     opacity: 1;
+    display: flex;
+    justify-content: center;
 }
