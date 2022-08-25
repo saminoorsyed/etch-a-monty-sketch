@@ -1,16 +1,24 @@
+const mean = document.querySelector('.mean');
 const container = document.querySelector('.container');
 const slider = document.querySelector('.slider');
 const displayDim = document.querySelector('.display-dim');
-const penColorPicker = document.getElementById('pen-color')
-const gridColorPicker = document.getElementById('grid-color')
-const body = document.querySelector('body')
+const penColorPicker = document.getElementById('pen-color');
+const gridColorPicker = document.getElementById('grid-color');
+const body = document.querySelector('body');
+const eraser = document.getElementById('eraser');
+const rainbow = document.getElementById('rainbow');
+
 // default pen and grid colors and grid dimensions
 let penColor = '#000000';
-let gridColor= '#ffffff';
+let penBackup= '#000000';
+let gridColor= 'rgb(255, 255, 255)';
 let dimension = 16;
 
-// flag for whether or not the mouse is down
+// flags
 let isDrag = false;
+let rainbowFlag = false;
+let eraserFlag = false;
+
 // display the dimensions
 function updateSize(gridSize) {
     dimension = gridSize
@@ -23,30 +31,72 @@ function populateContainer (gridSize){
     clearContainer();
     // find width of container div
     const containerWidth = container.clientWidth;
-    // calulate the width of each internal div
+    // calculate the width of each internal div
     const gridDim = (containerWidth/parseInt(dimension));
     for (i = 0; i < dimension**2; i++) {
         const gridEl = document.createElement('div');
         // set width and height of grid elements to appropriate value
         gridEl.style.width = `${gridDim}px`;
         gridEl.style.height = `${gridDim}px`;
+        gridEl.style.backgroundColor = gridColor
         container.appendChild(gridEl);
         // add event listeners to adjust isdrag flag
         // initiate changeGridColor function when mouse clicks or 
         gridEl.addEventListener('mouseover',changeGridElColor);
         gridEl.addEventListener('mousedown',changeGridElColor);
+        gridEl.addEventListener('click',changeGridElClick);
+    }
+}
+
+// handle logic for pen color
+function getPenColor(){
+    if (!rainbowFlag && !eraserFlag){
+        penColor = penBackup;
+    }else if (rainbowFlag){
+        penColor = randomColorVal();
+        console.log(penColor);
+    }else{
+        penColor = gridColor;
     }
 }
 
 function changeGridElColor(e) {
     if (!isDrag) return;
-    console.log(penColor);
-    this.style.backgroundColor = `${penColor}`;
+    getPenColor();
+    this.style.backgroundColor = penColor;
 }
 
+function changeGridElClick(e) {
+    getPenColor();
+    this.style.backgroundColor = penColor;
+}
 
-function getPenColor(color){
-    penColor = color
+function changeGridColor(newGridColor){
+    gridElList = [...container.children];
+    // change the hex color format provided by the color picker 
+    newRGB = hexToRgb(newGridColor);
+    gridElList.forEach((gridEl) => {
+        // if the current grid element color = the current grid color, change it to the new color
+        console.log(gridEl.style.backgroundColor == gridColor)
+        if (gridEl.style.backgroundColor == gridColor){
+            gridEl.style.backgroundColor = newRGB;
+        }
+    });
+    // store the new grid color in the global variable for future comparison
+    gridColor = newRGB;
+}
+
+function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    const red = parseInt(result[1], 16);
+    const green = parseInt(result[2], 16);
+    const blue = parseInt(result[3], 16);
+    return `rgb(${red}, ${green}, ${blue})`;
+  }
+
+function changePenColor(color){
+        penColor = color;
+        penBackup = penColor;
 }
 
 function getGridColor(color){
@@ -60,35 +110,55 @@ function clearContainer(){
         container.removeChild(container.firstChild);
     }
 }
+function randomColorVal(){
+    red = randomColorInt();
+    green = randomColorInt();
+    blue = randomColorInt();
+    return `rgb(${red}, ${green}, ${blue})`;
 
-function toggleInvert(){
-    console.log('invert');
 }
 
-function toggleRainbow(){
-    console.log('rainbow');
+function randomColorInt(){
+    return Math.floor(Math.random()*(255))
 }
 
+// change eraser button text
 function toggleEraser(){
-    console.log('eraser');
+    eraserFlag = !eraserFlag
+    if (rainbowFlag && eraserFlag){
+        toggleRainbow();
+    }
+    if (eraserFlag){
+        eraser.textContent = 'Remove eraser'
+    } else{
+        eraser.textContent = 'Add eraser'
+    }
+}
+// change rainbow button text
+function toggleRainbow(){
+    rainbowFlag = !rainbowFlag
+    if (rainbowFlag && eraserFlag){
+        toggleEraser();
+    }
+
+    if (rainbowFlag){
+        rainbow.textContent = 'remove rainbow';
+    }else{
+        rainbow.textContent = 'add rainbow';
+    }
 }
 
-function savePDF(){
-    console.log('save');
-}
-
-function listening (){
-    console.log('hearing');
-}
 // listen for change in dimension
 slider.onmousemove = (e) => updateSize(e.target.value);
 slider.onchange = (e) => populateContainer(e.target.value);
 
 // listen for change in colors
-penColorPicker.onchange = (e) => getPenColor(e.target.value);
-gridColorPicker.onchange = (e) => getGridColor(e.target.value);
+penColorPicker.onchange = (e) => changePenColor(e.target.value);
+gridColorPicker.onchange = (e) => changeGridColor(e.target.value);
 
-// if the mouse leaves the container set isdrag to false
+// move mean div behind container div
+
+
 
 // handle whether or not user is still holding the mouse down to draw
 container.addEventListener('mousedown',() => isDrag = true);

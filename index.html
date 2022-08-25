@@ -16,7 +16,7 @@
                     <span>pen-color</span>
                 </div>
                     <div class = "picker-box">
-                    <input type="color" id = "grid-color">
+                    <input type="color" value="#ffffff" id = "grid-color">
                     <span>grid-color</span>
                 </div>
             </div>
@@ -26,16 +26,16 @@
                 <span class="display-dim"></span>
             </div>
             <div class ="effects">
-                <button onclick="populateContainer()" >clear</button>
-                <button onclick="toggleInvert()">invert</button>
-                <button onclick ="toggleRainbow()">rainbow</button>
+                <button onclick="populateContainer(dimension)" >clear</button>
+                <button onclick ="toggleRainbow()" id="rainbow">add rainbow</button>
                 <!-- for eraser, just set pen color to grid background -->
-                <button onclick="toggleEraser()">eraser</button> 
-                <button onclick="savePDF()">save pdf</button>
+                <button onclick="toggleEraser()" id = "eraser">Add eraser</button> 
+                <button onclick = "toggleMean()">mean scale</button>
             </div>
         </div>
         <div class="container">
         </div>
+        <div class="container mean"></div>
     </div>
 <script src="./script.js"></script>
 </body>
