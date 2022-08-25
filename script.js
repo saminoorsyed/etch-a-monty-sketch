@@ -38,6 +38,8 @@ function populateContainer (gridSize){
     const containerWidth = container.clientWidth;
     // calculate the width of each internal div
     const gridDim = (containerWidth/parseInt(dimension));
+    console.log(meanScale);
+    console.log(meanFlag);
     for (i = 0; i < dimension**2; i++) {
         const gridEl = document.createElement('div');
         // set width and height of grid elements to appropriate value
@@ -45,16 +47,22 @@ function populateContainer (gridSize){
         gridEl.style.height = `${gridDim}px`;
         gridEl.style.backgroundColor = gridColor;
         container.appendChild(gridEl);
+        if (meanFlag && meanScale === 1){
+            gridEl.style.opacity = '0.1';
+        }
+        if (meanFlag && i%meanScale === 0) continue;
         // add event listeners to adjust isdrag flag
         // initiate changeGridColor function when mouse clicks or 
         gridEl.addEventListener('mouseover',changeGridElColor);
         gridEl.addEventListener('mousedown',changeGridElColor);
         gridEl.addEventListener('click',changeGridElClick);
+        
     }
 }
 
 // handle logic for pen color
 function getPenColor(){
+
     if (!rainbowFlag && !eraserFlag){
         penColor = penBackup;
     }else if (rainbowFlag){
@@ -110,7 +118,6 @@ function getGridColor(color){
 
 // button 'onclick' functions
 function clearContainer(){
-    console.log('clear');
     while (container.firstChild){
         container.removeChild(container.firstChild);
     }
@@ -154,13 +161,19 @@ function toggleRainbow(){
 }
 
 function meanAdjust(meanVal){
-    meanScale = meanVal;
+    meanScale = 10+1-parseInt(meanVal);
     // display how mean
-    if (meanScale === '10'){
+    if (meanVal === '10'){
         meanDisplay.textContent ='Draw to reveal a message'
     }else{
-        meanDisplay.textContent = `Meanness: ${meanScale}`
+        meanDisplay.textContent = `Meanness: ${meanVal}`
+        if (meanVal > 0){
+            meanFlag = true;
+        }else{
+            meanFlag = false;
+        }
     }
+    populateContainer(dimension);
 }
 
 // listen for change in dimension
