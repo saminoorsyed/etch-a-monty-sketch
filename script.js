@@ -1,8 +1,13 @@
 const container = document.querySelector('.container');
 const slider = document.querySelector('.slider');
 const displayDim = document.querySelector('.display-dim');
-const penColor = document.getElementById('pen-color')
-const gridColor = document.getElementById('grid-color')
+const penColorPicker = document.getElementById('pen-color')
+const gridColorPicker = document.getElementById('grid-color')
+
+// default pen and grid colors
+let penColor = '#000000';
+let gridColor= '#ffffff';
+
 // display the dimensions
 function updateSize(dimension) {
     displayDim.innerHTML = `${dimension} x ${dimension}`
@@ -21,28 +26,30 @@ function populateContainer (dimension){
     // calulate the width of each internal div
     const gridDim = (containerWidth/parseInt(dimension));
     for (i = 0; i < dimension**2; i++) {
-        console.log('hello')
         const gridEl = document.createElement('div');
         // set width and height of grid elements to appropriate value
         gridEl.style.width = `${gridDim}px`;
         gridEl.style.height = `${gridDim}px`;
         container.appendChild(gridEl);
-        // gridEl.addEventListener('mouseover', changeGridColor());
-        // gridEl.addEventListener('mousedown', changeGridColor());
+        // gridEl.addEventListener('mouseover', (e) => changeGridElColor(e));
+        gridEl.addEventListener('mouseover',changeGridElColor);
+        gridEl.addEventListener('mousedown',changeGridElColor);
 
     }
+}
 
-    // create dimension**2 number of divs to fill the container
-    // add onclick and drag listeners to each div to change the color
+function changeGridElColor(e) {
+    console.log(penColor);
+    this.style.backgroundColor = `${penColor}`;
 }
 
 
 function getPenColor(color){
-    console.log(color);
+    penColor = color
 }
 
 function getGridColor(color){
-    console.log(color);
+    gridColor = color;
 }
 
 // button 'onclick' functions
@@ -74,8 +81,8 @@ slider.onmousemove = (e) => updateSize(e.target.value);
 slider.onchange = (e) => populateContainer(e.target.value);
 
 // listen for change in colors
-penColor.onchange = (e) => getPenColor(e.target.value);
-gridColor.onchange = (e) => getGridColor(e.target.value);
+penColorPicker.onchange = (e) => getPenColor(e.target.value);
+gridColorPicker.onchange = (e) => getGridColor(e.target.value);
 
 
-
+populateContainer(16);

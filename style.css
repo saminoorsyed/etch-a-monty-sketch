@@ -25,9 +25,6 @@
     box-shadow: 0 0 5px 5px #888 ;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: flex-start;
 }
 
 .grid-param {
@@ -40,6 +37,6 @@
 
 /* style grid elements inside of the container */
 .container > div {
+    /* use outline instead of border so that no extra pixels are added to div size */
     outline: 1px solid black;
-    flex-wrap: wrap;
 }
