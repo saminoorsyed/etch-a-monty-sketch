@@ -1,6 +1,13 @@
 # etch-a-sketch
 etch-a-sketch project
 
+IDEAS FOR IMPROVEMENT
+
+mean etchesketch:
+-- spells out a meaner and meaner message as you move the slider up or the lines from monty python when the french were insulting king arthur.
+-- doesn't let you draw an increasing and random selection of boxes as the slider moves up
+-- could accomplish by having large text behind the container and changing the div opacity to 0 once it's colored
+
 assignment directions:
 
 Create a webpage with a 16x16 grid of square divs.

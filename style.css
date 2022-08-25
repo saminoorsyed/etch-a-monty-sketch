@@ -38,5 +38,5 @@
 /* style grid elements inside of the container */
 .container > div {
     /* use outline instead of border so that no extra pixels are added to div size */
-    outline: 1px solid black;
+    outline: .1px solid rgb(200, 131, 131);
 }
