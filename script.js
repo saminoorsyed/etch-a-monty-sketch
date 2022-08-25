@@ -7,16 +7,18 @@ const body = document.querySelector('body')
 // default pen and grid colors and grid dimensions
 let penColor = '#000000';
 let gridColor= '#ffffff';
-const defaultDimension = 16;
+let dimension = 16;
 
 // flag for whether or not the mouse is down
 let isDrag = false;
 // display the dimensions
-function updateSize(dimension) {
+function updateSize(gridSize) {
+    dimension = gridSize
     displayDim.innerHTML = `${dimension} x ${dimension}`
 }
 
-function populateContainer (dimension){
+function populateContainer (gridSize){
+    dimension = gridSize
     // clear the current container
     clearContainer();
     // find width of container div
@@ -57,7 +59,6 @@ function clearContainer(){
     while (container.firstChild){
         container.removeChild(container.firstChild);
     }
-
 }
 
 function toggleInvert(){
@@ -93,5 +94,5 @@ gridColorPicker.onchange = (e) => getGridColor(e.target.value);
 container.addEventListener('mousedown',() => isDrag = true);
 body.addEventListener('mouseup',()=> isDrag = false);
 
-populateContainer(defaultDimension);
-updateSize(defaultDimension)
+populateContainer(dimension);
+updateSize(dimension)
