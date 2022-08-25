@@ -24,17 +24,17 @@
                 <input type="range" class="slider" min="16" max="64" step="1" value="1">
                 <span>grid dimensions</span>
                 <span class="display-dim"></span>
+                <input type="range" class="mean-scale" min="0" max="10" step="1" value="0">
+                <span class="display-mean">meanness: 0</span>
             </div>
             <div class ="effects">
                 <button onclick="populateContainer(dimension)" >clear</button>
                 <button onclick ="toggleRainbow()" id="rainbow">add rainbow</button>
                 <!-- for eraser, just set pen color to grid background -->
                 <button onclick="toggleEraser()" id = "eraser">Add eraser</button> 
-                <button onclick = "toggleMean()">mean scale</button>
             </div>
         </div>
-        <div class="container">
-        </div>
+        <div class="container"></div>
         <div class="container mean"></div>
     </div>
 <script src="./script.js"></script>

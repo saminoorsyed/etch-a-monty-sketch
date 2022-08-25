@@ -157,12 +157,21 @@ penColorPicker.onchange = (e) => changePenColor(e.target.value);
 gridColorPicker.onchange = (e) => changeGridColor(e.target.value);
 
 // move mean div behind container div
+// let containerCoords = container.getBoundingClientRect();
+// let coords = {
+//     top: containerCoords.top,
+//     left: containerCoords.left,
+//     width: containerCoords.width,
+//     height: containerCoords.height
+// };
+// console.log(containerCoords);
+// mean.style.height = coords.height +'px';
+// mean.style.width = coords.width +'px';
+// mean.style.transform =`translate(-${coords.left}px, -${coords.top}px)`;
 
-
-
-// handle whether or not user is still holding the mouse down to draw
-container.addEventListener('mousedown',() => isDrag = true);
-body.addEventListener('mouseup',()=> isDrag = false);
+// // handle whether or not user is still holding the mouse down to draw
+// container.addEventListener('mousedown',() => isDrag = true);
+// body.addEventListener('mouseup',()=> isDrag = false);
 
 populateContainer(dimension);
-updateSize(dimension)
+updateSize(dimension);
