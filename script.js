@@ -166,6 +166,7 @@ function montyAdjust(montyVal){
     montyDisplay.textContent = `Montyness: ${montyVal}`
     // display how monty
     if (montyScale >0){
+        changeGridColor('#25c301');
         montyDisplay1.textContent ='Draw to reveal the Montyness'
         montyFlag = true;
         if (montyScale ===1){
@@ -192,7 +193,8 @@ function montyAdjust(montyVal){
 
     }else{
         montyFlag = false;
-        montyDisplay1.textContent = 'I fart in your general direction'
+        montyDisplay1.textContent = 'I fart in your general direction';
+        changeGridColor('#ffffff');
     }
 }
 

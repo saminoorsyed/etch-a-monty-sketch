@@ -1,28 +1,41 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('./images/montyCollage.jpg');
+}
+#title{
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    color: rgb(37, 195, 1);
+    font-size: 80px;
+
+
+}
 .wrapper {
     display: flex;
-    margin: 40px;
+    height: auto;
     gap: 40px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    box-shadow: 0 0 5px 5px #888
 }
 
 .control-panel{
     width: 200px;
-    height: 600px;
+    height: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     box-shadow: 0 0 5px 5px #888;
-    gap: 100px;
     background-color: white;
+    background-color: buttonface;
 }
 
 .container {
-    width: 600px;
-    min-width: 600px;
-    height: 600px;
+    width: 500px;
+    min-width: 500px;
+    height: 500px;
     box-shadow: 0 0 5px 5px #888 ;
     display: flex;
     flex-wrap: wrap;
@@ -34,7 +47,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
 }
 
 .monty{
@@ -42,43 +54,55 @@
 }
 
 /* control panel */
+.picker-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.effects{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
 button {
     padding: 10px 20px;
-    border: 1px solid var(--primary-dark);
-    border-radius: 5px;
-  }
+    border: 1px solid rgb(128, 128, 128);
+    border-radius: 50px;
+}
   
   button,
   input[type='color'] {
     transition: transform 0.1s ease-in-out;
-  }
+}
   
-  button:hover,
-  input[type='color']:hover {
+button:hover,
+input[type='color']:hover,
+input[type = 'range']:hover {
     transform: scale(1.05);
-  }
+}
   
-  input[type='color']:active {
+input[type='color']:active {
     transition: transform 0.05s ease-in-out;
     transform: scale(1);
-  }
+}
   
   input[type='color'] {
     -webkit-appearance: none;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border: none;
   }
-  
-  input[type='color']::-webkit-color-swatch-wrapper {
-    padding: 0;
-  }
-  
   input[type='color']::-webkit-color-swatch {
     border: none;
     border-radius: 50px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0 0 7px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
+  
+  
+ 
 
-  input[type = 'range']{
-  }
+  
