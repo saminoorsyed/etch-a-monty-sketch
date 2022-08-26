@@ -27,7 +27,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    box-shadow: 0 0 5px 5px #888;
+    box-shadow: 0 0 5px 5px rgb(37, 195, 1);
     background-color: white;
     background-color: buttonface;
 }
@@ -36,7 +36,7 @@ body {
     width: 500px;
     min-width: 500px;
     height: 500px;
-    box-shadow: 0 0 5px 5px #888 ;
+    box-shadow: 0 0 5px 5px rgb(37, 195, 1) ;
     display: flex;
     flex-wrap: wrap;
     z-index: auto;
