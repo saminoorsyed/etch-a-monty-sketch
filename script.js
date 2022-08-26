@@ -1,23 +1,24 @@
-const mean = document.querySelector('.mean');
+const monty = document.querySelector('.monty');
 const container = document.querySelector('.container');
 const slider = document.querySelector('.slider');
-const meanness = document.querySelector('.mean-scale');
+const montyness = document.querySelector('.monty-scale');
 const displayDim = document.querySelector('.display-dim');
 const penColorPicker = document.getElementById('pen-color');
 const gridColorPicker = document.getElementById('grid-color');
 const body = document.querySelector('body');
 const eraser = document.getElementById('eraser');
 const rainbow = document.getElementById('rainbow');
-const meanDisplay = document.getElementById("display-mean")
+const montyDisplay = document.getElementById("display-monty")
+const montyDisplay1 = document.getElementById("display-monty1")
 
 // default pen and grid colors and grid dimensions
 let penColor = '#000000';
 let penBackup= '#000000';
 let gridColor= 'rgb(255, 255, 255)';
 let dimension = 16;
-let meanFlag = false;
-let meanCount = 0;
-let meanScale = 0;
+let montyFlag = false;
+let montyCount = 0;
+let montyScale = 0;
 
 // flags
 let isDrag = false;
@@ -38,8 +39,8 @@ function populateContainer (gridSize){
     const containerWidth = container.clientWidth;
     // calculate the width of each internal div
     const gridDim = (containerWidth/parseInt(dimension));
-    console.log(meanScale);
-    console.log(meanFlag);
+    console.log(montyScale);
+    console.log(montyFlag);
     for (i = 0; i < dimension**2; i++) {
         const gridEl = document.createElement('div');
         // set width and height of grid elements to appropriate value
@@ -47,16 +48,11 @@ function populateContainer (gridSize){
         gridEl.style.height = `${gridDim}px`;
         gridEl.style.backgroundColor = gridColor;
         container.appendChild(gridEl);
-        if (meanFlag && meanScale === 1){
-            gridEl.style.opacity = '0.1';
-        }
-        if (meanFlag && i%meanScale === 0) continue;
         // add event listeners to adjust isdrag flag
         // initiate changeGridColor function when mouse clicks or 
         gridEl.addEventListener('mouseover',changeGridElColor);
         gridEl.addEventListener('mousedown',changeGridElColor);
         gridEl.addEventListener('click',changeGridElClick);
-        
     }
 }
 
@@ -77,6 +73,10 @@ function changeGridElColor(e) {
     if (!isDrag) return;
     getPenColor();
     this.style.backgroundColor = penColor;
+    this.style.opacity = 1;
+    if (montyFlag){
+        this.style.opacity = .2;
+    }
 }
 
 function changeGridElClick(e) {
@@ -160,27 +160,47 @@ function toggleRainbow(){
     }
 }
 
-function meanAdjust(meanVal){
-    meanScale = 10+1-parseInt(meanVal);
-    // display how mean
-    if (meanVal === '10'){
-        meanDisplay.textContent ='Draw to reveal a message'
-    }else{
-        meanDisplay.textContent = `Meanness: ${meanVal}`
-        if (meanVal > 0){
-            meanFlag = true;
-        }else{
-            meanFlag = false;
-        }
-    }
+function montyAdjust(montyVal){
     populateContainer(dimension);
+    montyScale = parseInt(montyVal);
+    montyDisplay.textContent = `Montyness: ${montyVal}`
+    // display how monty
+    if (montyScale >0){
+        montyDisplay1.textContent ='Draw to reveal the Montyness'
+        montyFlag = true;
+        if (montyScale ===1){
+            container.style.backgroundImage = "url('./images/montyGovernment.jpg')"
+            container.style.backgroundSize = "500px 500px";
+            container.style.backgroundRepeat = "no-repeat";
+        } else if (montyScale === 2 ){
+            container.style.backgroundImage = "url('./images/montyScratch.jpg')"
+            container.style.backgroundSize = "500px 500px";
+            container.style.backgroundRepeat = "no-repeat";
+        }else if (montyScale === 3 ){
+            container.style.backgroundImage = "url('./images/montyShrubbery.jpg')"
+            container.style.backgroundSize = "500px 500px";
+            container.style.backgroundRepeat = "no-repeat";
+        }else if (montyScale === 4 ){
+            container.style.backgroundImage = "url('./images/montyTaunt.jpg')"
+            container.style.backgroundSize = "500px 500px";
+            container.style.backgroundRepeat = "no-repeat";
+        }else if (montyScale === 5 ){
+            container.style.backgroundImage = "url('./images/montyWitch.png')"
+            container.style.backgroundSize = "500px 500px";
+            container.style.backgroundRepeat = "no-repeat";
+        }
+
+    }else{
+        montyFlag = false;
+        montyDisplay1.textContent = 'I fart in your general direction'
+    }
 }
 
 // listen for change in dimension
 slider.onmousemove = (e) => updateSize(e.target.value);
 slider.onchange = (e) => populateContainer(e.target.value);
-// listen for change in meanness
-meanness.onchange = (e) => meanAdjust(e.target.value);
+// listen for change in montyness
+montyness.onchange = (e) => montyAdjust(e.target.value);
 
 
 // listen for change in colors

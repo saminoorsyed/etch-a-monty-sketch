@@ -24,8 +24,10 @@
                 <input type="range" class="slider" min="16" max="64" step="1" value="1">
                 <span>grid dimensions</span>
                 <span class="display-dim"></span>
-                <input type="range" class="mean-scale" min="0" max="10" step="1" value="0">
-                <span id="display-mean">Meanness: 0</span>
+                <input type="range" class="monty-scale" min="0" max="5" step="1" value="0">
+                <span id="display-monty">Montyness: 0</span>
+                <span id="display-monty1">I fart in your general direction</span>
+
             </div>
             <div class ="effects">
                 <button onclick="populateContainer(dimension)" >clear</button>
@@ -34,10 +36,11 @@
                 <button onclick="toggleEraser()" id = "eraser">Add eraser</button> 
             </div>
         </div>
-        <div class="container"></div>
-        <div class="container mean">
-            <span></span>
+        <div class="container">
         </div>
+        <!-- <div class="container monty">
+            <span></span>
+        </div> -->
     </div>
 <script src="./script.js"></script>
 </body>
