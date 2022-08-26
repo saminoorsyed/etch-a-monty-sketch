@@ -75,7 +75,7 @@ function changeGridElColor(e) {
     this.style.backgroundColor = penColor;
     this.style.opacity = 1;
     if (montyFlag){
-        this.style.opacity = .2;
+        this.style.opacity = .0;
     }
 }
 
